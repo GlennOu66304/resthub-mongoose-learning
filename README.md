@@ -1,4 +1,10 @@
 # REST API (MongoDB local version)
+## Run the demo Project:
+```
+cd to the project
+then npm install
+node index
+```
 
 ## MongoDB back Stage
 Make sure that you run the MongoDB in the backstage
