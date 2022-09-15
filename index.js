@@ -9,12 +9,16 @@ require('dotenv').config()
 let app = express();
 
 // Import routes
-let apiRoutes = require("./api-routes");
+let apiRoutes = require("./routes/api-routes");
 // Configure bodyparser to handle post requests
 app.use(bodyParser.urlencoded({extended: true}));
 app.use(bodyParser.json());
 // Connect to Mongoose and set connection variable
-mongoose.connect(process.env.MONGO_URL, {useNewUrlParser: true});
+
+// MongoParseError: Invalid connection string
+// https://stackoverflow.com/questions/54721216/mongoparseerror-invalid-connection-string
+
+mongoose.connect(process.env.MONGO_URL, {useNewUrlParser: true,useUnifiedTopology: true});
 var db = mongoose.connection;
 
 // Added check for DB connection
@@ -24,9 +28,9 @@ if (! db)
     console.log("Db connected successfully")
 
 
-
+console.log(process.env.MONGO_URL)
 // Setup server port
-var port = process.env.PORT || 8080;
+var port = process.env.PORT || 8000;
 
 // Send message for default URL
 app.get('/', (req, res) => res.send('Hello World with Express'));

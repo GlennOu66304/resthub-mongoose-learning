@@ -6,9 +6,15 @@ router.get('/', function (req, res) {
     res.json({status: 'API Its Working', message: 'Welcome to RESTHub crafted with love!'});
 });
 // Import contact controller
-var contactController = require('./contactController');
+var contactController = require('../controller/contactController');
 // Contact routes
-router.route('/contacts').get(contactController.index).post(contactController.new);
-router.route('/contacts/:contact_id').get(contactController.view).patch(contactController.update).put(contactController.update).delete(contactController.delete);
+router.route('/contacts').get(contactController.contacts)
+router.route('/contacts').post(contactController.new);
+
+// contact_id update
+router.route('/contacts/:contact_id').get(contactController.view)
+router.route('/contacts/:contact_id').patch(contactController.update)
+router.route('/contacts/:contact_id').put(contactController.update)
+router.route('/contacts/:contact_id').delete(contactController.delete);
 // Export API routes
 module.exports = router;
